@@ -12,7 +12,7 @@ const verifyToken = (req,res,next) => {
         }
 
         let newToken = token.slice(7);
-        jwt.verify(newToken,'Sparky',(err,decodeToken) => {
+        jwt.verify(newToken, process.env.SECRET ,(err,decodeToken) => {
             if(err){
                 return res.status(400).send({
                     success : false,
