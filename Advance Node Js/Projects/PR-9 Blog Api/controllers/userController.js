@@ -48,11 +48,6 @@ const addUser = async (req, res) => {
         });
       }
     }
-    let token = await jwt.sign({ user: user }, "sparky", { expiresIn: "2hr" });
-    return res.status(200).send({
-      success: true,
-      token: token,
-    });
   } catch (err) {
     return res.status(400).send({
       success: false,
@@ -81,7 +76,7 @@ const loginUser = async (req,res) => {
       return res.status(200).send({
           success : true,
           token : token
-      })
+      });
   } catch (err) {
       return res.status(501).send({
           success:false,
