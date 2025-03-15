@@ -10,7 +10,10 @@ const insertProduct = async (req, res) => {
     try {
         const { name, description, price, quantity } = req.body;
         if (!name || !description || !price || !quantity || !req.file) {
-            console.log('All Fields Are Required');
+            console.log('All Fields Are Required....!!');
+            if (req.file) {
+                fs.unlinkSync(req.file.path);
+            };
             return res.redirect('/product');
         }
 

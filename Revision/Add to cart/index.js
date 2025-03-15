@@ -33,6 +33,7 @@ app.use(session({
 
 app.use(passport.session());
 app.use(passportLocal.initialize());
+app.use(passport.setUser);
 
 app.use(express.urlencoded());
 app.use('/', require('./routes/indexRoute'));
@@ -42,4 +43,4 @@ app.listen(port, (err) => {
         console.log(err);
     }
     console.log(`Server Runing on : ${port}`);
-})
+});

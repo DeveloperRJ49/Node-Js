@@ -2,7 +2,10 @@ const User = require('../models/userModel');
 
 const loginUser = async (req, res) => {
     try {
-        return res.render('loginuser')
+        if (res.locals.users) {
+            return res.redirect("/product");
+        }
+        return res.render('loginuser');
     } catch (err) {
         console.log(err);
         return false;
@@ -11,6 +14,9 @@ const loginUser = async (req, res) => {
 
 const registerUser = async (req, res) => {
     try {
+        if (res.locals.users) {
+            return res.redirect("/product");
+        }
         return res.render('register');
     } catch (err) {
         console.log(err);
@@ -55,7 +61,21 @@ const registerUserData = async (req, res) => {
 const checkLogin = async (req, res) => {
     try {
         return res.redirect('/product');
-        
+
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+const logoutUser = async (req, res) => {
+    try {
+        req.logout((err) => {
+            if (err) {
+                return res.redirect("/product");
+            }
+            return res.redirect("/");
+        });
     } catch (err) {
         console.log(err);
         return false;
@@ -66,5 +86,6 @@ module.exports = {
     loginUser,
     registerUser,
     registerUserData,
-    checkLogin
+    checkLogin,
+    logoutUser
 }
