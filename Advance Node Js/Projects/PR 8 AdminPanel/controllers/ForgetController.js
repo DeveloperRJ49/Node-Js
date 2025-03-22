@@ -18,13 +18,13 @@ const email = async (req, res) => {
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: "savraraju49@gmail.com",
-        pass: "vqlbeqqelplwgytc",
+        user: process.env.SMTP_MAIL,
+        pass: process.env.SMTP_PASSWORD,
       },
     });
 
     var mailOptions = {
-      from: "savraraju49@gmail.com",
+      from: process.env.SMTP_MAIL,
       to: email,
       subject: "Sending Email using Node.js",
       html: `Share Your OTP ${otp}`,

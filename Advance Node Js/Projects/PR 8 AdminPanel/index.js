@@ -1,6 +1,9 @@
 const express = require("express");
 
-let port = 8000;
+const dotenv = require('dotenv')
+dotenv.config();
+let port = process.env.PORT || 8000;
+
 
 let app = express();
 
@@ -23,13 +26,13 @@ const passport = require('passport');
 const passportlocal = require('./config/passportlocal');
 
 app.use(session({
-    secret: 'sparky',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24
     }
-}))
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -37,7 +40,7 @@ app.use(passport.setUser);
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/',require('./routes/indexRoute'));
+app.use('/', require('./routes/indexRoute'));
 
 app.listen(port, (err) => {
     if (err) {
@@ -45,5 +48,4 @@ app.listen(port, (err) => {
         return false;
     }
     console.log(` Server Running on : ${port} `);
-
 });

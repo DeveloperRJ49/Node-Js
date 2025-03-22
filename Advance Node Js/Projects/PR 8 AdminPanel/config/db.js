@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const connectDB = async () => {
     try {
         const connect = await mongoose.connect(
-            `mongodb+srv://savraraju:It4chi@cluster0.lxd5n.mongodb.net/Admin_Panel`
+            process.env.DB_URL
         );
         console.log('Connected to MongoDB');
         
@@ -14,5 +14,3 @@ const connectDB = async () => {
 };
 
 module.exports = connectDB() ;
-
-// mongodb+srv://savraraju:<db_password>@cluster0.lxd5n.mongodb.net/
